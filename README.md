@@ -1,4 +1,26 @@
-from IPython.display import display, HTML
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <!-- Ajouter ces méta-tags pour le référencement -->
+    <meta name="description" content="Formulaire d'inscription en ligne du Collège de Diade">
+    <meta name="keywords" content="inscription, collège, Diade, éducation">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- [Conserver le CSS existant] -->
+</head>
+<body>
+    <!-- [Conserver le formulaire existant] -->
+    
+    <!-- Ajouter Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXX"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-XXXXXXX');
+    </script>
+</body>
+</html>from IPython.display import display, HTML
 
 html_code = '''
 <!DOCTYPE html>
