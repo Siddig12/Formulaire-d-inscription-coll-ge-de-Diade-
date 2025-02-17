@@ -1,162 +1,179 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <!-- Ajouter ces méta-tags pour le référencement -->
-    <meta name="description" content="Formulaire d'inscription en ligne du Collège de Diade">
-    <meta name="keywords" content="inscription, collège, Diade, éducation">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <!-- [Conserver le CSS existant] -->
-</head>
-<body>
-    <!-- [Conserver le formulaire existant] -->
-    
-    <!-- Ajouter Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXX"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'G-XXXXXXX');
-    </script>
-</body>
-</html>from IPython.display import display, HTML
-
-html_code = '''
-<!DOCTYPE html>
-<html lang="fr">
-<head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Formulaire d'inscription en ligne - Collège de Diade">
     <title>Inscription - Collège de Diade</title>
     <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            max-width: 800px;
-            margin: 20px auto;
-            padding: 20px;
-            background-color: #f0f8ff;
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --error-color: #e74c3c;
         }
 
-        .form-container {
-            background-color: white;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background: #f8f9fa;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 2rem auto;
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
 
         h1 {
-            color: #2c3e50;
+            color: var(--primary-color);
             text-align: center;
-            margin-bottom: 30px;
+            margin-bottom: 2rem;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
         }
 
         .form-group {
-            margin-bottom: 20px;
+            margin-bottom: 1rem;
         }
 
         label {
             display: block;
-            margin-bottom: 8px;
-            color: #34495e;
-            font-weight: bold;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .required::after {
+            content: " *";
+            color: var(--error-color);
         }
 
         input, select, textarea {
             width: 100%;
-            padding: 10px;
-            border: 1px solid #bdc3c7;
-            border-radius: 5px;
-            box-sizing: border-box;
+            padding: 0.8rem;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            transition: border-color 0.3s ease;
         }
 
         input:focus, select:focus, textarea:focus {
-            outline: 2px solid #3498db;
-        }
-
-        .grid-container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
+            border-color: var(--secondary-color);
+            outline: none;
         }
 
         button {
-            background-color: #3498db;
+            background: var(--secondary-color);
             color: white;
-            padding: 12px 25px;
+            padding: 1rem 2rem;
             border: none;
-            border-radius: 5px;
+            border-radius: 6px;
             cursor: pointer;
-            font-size: 16px;
+            font-size: 1.1rem;
             width: 100%;
-            transition: background-color 0.3s;
+            transition: transform 0.2s, background 0.3s;
         }
 
         button:hover {
-            background-color: #2980b9;
+            background: #2980b9;
+            transform: translateY(-2px);
         }
 
-        .required::after {
-            content: "*";
-            color: red;
-            margin-left: 3px;
+        .loading {
+            position: relative;
+            pointer-events: none;
+        }
+
+        .loading::after {
+            content: "";
+            position: absolute;
+            right: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 1.5rem;
+            height: 1.5rem;
+            border: 3px solid rgba(255,255,255,0.3);
+            border-top-color: white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: translateY(-50%) rotate(360deg); }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                margin: 1rem;
+                padding: 1rem;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="form-container">
-        <h1>Formulaire d'Inscription<br><span style="font-size: 0.8em;">Collège de Diade</span></h1>
-        
-        <form id="inscriptionForm" onsubmit="return validateForm(event)">
-            <div class="grid-container">
+    <div class="container">
+        <h1>Inscription au Collège de Diade</h1>
+        <form id="inscriptionForm">
+            <div class="form-grid">
                 <div class="form-group">
                     <label class="required">Prénom</label>
                     <input type="text" id="prenom" required>
                 </div>
-                
                 <div class="form-group">
                     <label class="required">Nom</label>
                     <input type="text" id="nom" required>
                 </div>
             </div>
 
-            <div class="form-group">
-                <label class="required">Date de naissance</label>
-                <input type="date" id="naissance" required>
+            <div class="form-grid">
+                <div class="form-group">
+                    <label class="required">Date de naissance</label>
+                    <input type="date" id="naissance" required>
+                </div>
+                <div class="form-group">
+                    <label class="required">Genre</label>
+                    <select id="genre" required>
+                        <option value="">Choisir...</option>
+                        <option>Masculin</option>
+                        <option>Féminin</option>
+                        <option>Autre</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-grid">
+                <div class="form-group">
+                    <label class="required">Email</label>
+                    <input type="email" id="email" required>
+                </div>
+                <div class="form-group">
+                    <label class="required">Téléphone</label>
+                    <input type="tel" id="telephone" pattern="[0-9]{10}" required>
+                </div>
             </div>
 
             <div class="form-group">
-                <label class="required">Genre</label>
-                <select id="genre" required>
-                    <option value="">Sélectionner...</option>
-                    <option>Masculin</option>
-                    <option>Féminin</option>
-                    <option>Autre</option>
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label class="required">Email</label>
-                <input type="email" id="email" required>
-            </div>
-
-            <div class="form-group">
-                <label class="required">Téléphone</label>
-                <input type="tel" id="telephone" pattern="[0-9]{10}" required>
-            </div>
-
-            <div class="form-group">
-                <label>Adresse</label>
+                <label>Adresse complète</label>
                 <textarea id="adresse" rows="3"></textarea>
             </div>
 
             <div class="form-group">
-                <label class="required">Filière choisie</label>
+                <label class="required">Filière</label>
                 <select id="filiere" required>
-                    <option value="">Sélectionner une filière...</option>
+                    <option value="">Choisir une filière</option>
                     <option>Sciences</option>
                     <option>Lettres</option>
                     <option>Commerce</option>
-                    <option>Ingénierie</option>
+                    <option>Informatique</option>
                 </select>
             </div>
 
@@ -165,60 +182,108 @@ html_code = '''
     </div>
 
     <script>
-        function validateForm(event) {
-            event.preventDefault();
+        const form = document.getElementById('inscriptionForm');
+        const btnSubmit = form.querySelector('button');
 
-            // Vérification des champs requis
-            const requiredFields = document.querySelectorAll('[required]');
-            let isValid = true;
-
-            requiredFields.forEach(field => {
-                if (!field.value.trim()) {
-                    isValid = false;
-                    field.style.outline = '2px solid red';
-                } else {
-                    field.style.outline = '';
-                }
-            });
-
-            // Vérification spécifique pour l'email
-            const email = document.getElementById('email');
-            if (!/\S+@\S+\.\S+/.test(email.value)) {
-                isValid = false;
-                email.style.outline = '2px solid red';
-            }
-
-            if (isValid) {
-                // Récupération des données
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            btnSubmit.classList.add('loading');
+            
+            if(validateForm()) {
                 const formData = {
-                    prenom: document.getElementById('prenom').value,
-                    nom: document.getElementById('nom').value,
+                    timestamp: new Date().toISOString(),
+                    prenom: document.getElementById('prenom').value.trim(),
+                    nom: document.getElementById('nom').value.trim(),
                     naissance: document.getElementById('naissance').value,
                     genre: document.getElementById('genre').value,
-                    email: document.getElementById('email').value,
-                    telephone: document.getElementById('telephone').value,
-                    adresse: document.getElementById('adresse').value,
+                    email: document.getElementById('email').value.trim(),
+                    telephone: document.getElementById('telephone').value.trim(),
+                    adresse: document.getElementById('adresse').value.trim(),
                     filiere: document.getElementById('filiere').value
                 };
 
-                // Affichage des résultats
-                alert('Inscription réussie !\n\n' + 
-                      `Prénom: ${formData.prenom}\n` +
-                      `Nom: ${formData.nom}\n` +
-                      `Filière: ${formData.filiere}\n` +
-                      `Email: ${formData.email}`);
-                
-                // Réinitialisation du formulaire
-                document.getElementById('inscriptionForm').reset();
-                return true;
-            } else {
-                alert('Veuillez remplir correctement tous les champs requis !');
-                return false;
+                try {
+                    // Remplacez par votre URL Google Apps Script
+                    const response = await fetch('https://script.google.com/macros/s/ABCDEF/exec', {
+                        method: 'POST',
+                        body: JSON.stringify(formData),
+                        headers: { 'Content-Type': 'application/json' }
+                    });
+
+                    if(response.ok) {
+                        showConfirmation();
+                        form.reset();
+                    }
+                } catch(error) {
+                    console.error('Erreur:', error);
+                    alert('Une erreur est survenue. Veuillez réessayer.');
+                }
             }
+            
+            btnSubmit.classList.remove('loading');
+        });
+
+        function validateForm() {
+            let isValid = true;
+            const requiredFields = form.querySelectorAll('[required]');
+
+            requiredFields.forEach(field => {
+                field.style.borderColor = '#ddd';
+                
+                if(!field.value.trim()) {
+                    isValid = false;
+                    field.style.borderColor = 'var(--error-color)';
+                }
+                
+                if(field.type === 'email' && !isValidEmail(field.value)) {
+                    isValid = false;
+                    field.style.borderColor = 'var(--error-color)';
+                }
+            });
+
+            return isValid;
         }
+
+        function isValidEmail(email) {
+            return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+        }
+
+        function showConfirmation() {
+            const confirmation = document.createElement('div');
+            confirmation.style = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: #2ecc71;
+                color: white;
+                padding: 1rem 2rem;
+                border-radius: 6px;
+                box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+                animation: slideIn 0.3s ease-out;
+            `;
+            
+            confirmation.textContent = 'Inscription réussie !';
+            document.body.appendChild(confirmation);
+
+            setTimeout(() => {
+                confirmation.style.animation = 'slideOut 0.3s ease-in';
+                setTimeout(() => confirmation.remove(), 300);
+            }, 3000);
+        }
+
+        // Ajouter les animations CSS dynamiquement
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideIn {
+                from { transform: translateX(100%); }
+                to { transform: translateX(0); }
+            }
+            @keyframes slideOut {
+                from { transform: translateX(0); }
+                to { transform: translateX(100%); }
+            }
+        `;
+        document.head.appendChild(style);
     </script>
 </body>
 </html>
-'''
-
-display(HTML(html_code)) 
